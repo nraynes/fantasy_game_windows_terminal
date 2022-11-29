@@ -1,0 +1,11 @@
+﻿  Controller.cpp
+  Engine.cpp
+  Field.cpp
+  Game.cpp
+  Screen.cpp
+  Source.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1026 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Release\fantasy_game.exe
