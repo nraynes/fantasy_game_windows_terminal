@@ -13,7 +13,7 @@ class Screen {
 		bool watching;
 
 	public:
-		Screen() : output(""), FPS(15), watching(false) {
+		Screen() : output(""), FPS(60), watching(false) {
 			hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		}
 

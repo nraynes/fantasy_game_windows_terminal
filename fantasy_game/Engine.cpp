@@ -21,5 +21,6 @@ class GameEngine {
 			controller.stopListening();
 			screen.stop();
 			game.stop();
+			std::cout << "Game Engine stopped..." << "\n";
 		}
 };

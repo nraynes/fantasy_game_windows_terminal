@@ -12,22 +12,25 @@ class Game {
 
 		void play(Field& field, Controller& controller, bool& engineRunning) {
 			running = true;
+			Point pixel;
+			int x = 30;
+			int y = 15;
+			pixel.value = '0';
 			while (running) {
-				int x = rand() % 59;
-				int y = rand() % 29;
-				Point pixel;
-				pixel.location.x = x;
-				pixel.location.y = y;
-				pixel.value = '0';
 				Input command = controller.getInput();
-				if (command == Input::ACTION) {
-					x = 10;
-					y = 10;
-					pixel.location.x = x;
-					pixel.location.y = y;
-				} else if (command == Input::CANCEL) {
-					engineRunning = false;
+				if (command == Input::LEFT && x > 0) {
+					x--;
 				}
+				else if (command == Input::RIGHT && x < 60) {
+					x++;
+				}
+				else if (command == Input::UP && y > 0) {
+					y--;
+				}
+				else if (command == Input::DOWN && y < 30) {
+					y++;
+				}
+				Sleep(100);
 				field.clear();
 				field.matrix[y][x] = pixel;
 			}

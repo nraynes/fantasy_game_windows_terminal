@@ -143,6 +143,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
