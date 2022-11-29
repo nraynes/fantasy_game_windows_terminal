@@ -1,5 +1,5 @@
 #include <iostream>
-#include ".\Engine.cpp"
+#include "Engine.cpp"
 
 int main() {
 	Screen screen;

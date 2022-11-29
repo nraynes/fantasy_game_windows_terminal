@@ -2,7 +2,7 @@
 #include <string>
 #include <future>
 #include <Windows.h>
-#include ".\Game.cpp"
+#include "Game.cpp"
 
 class Screen {
 	private:

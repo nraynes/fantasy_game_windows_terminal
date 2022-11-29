@@ -1,5 +1,5 @@
-static const int fieldHeight = 30;
-static const int fieldWidth = 60;
+static const int fieldHeight = 29;
+static const int fieldWidth = 110;
 static const char empty = '-';
 
 struct Coord {

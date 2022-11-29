@@ -1,4 +1,4 @@
-#include ".\Screen.cpp"
+#include "Screen.cpp"
 
 class GameEngine {
 	private:

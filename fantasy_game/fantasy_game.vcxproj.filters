@@ -13,28 +13,37 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Game Engine">
+      <UniqueIdentifier>{2a7e8146-507a-480a-a6df-514ca5b7162b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{7a794419-85d2-4ddd-8ab7-11ba0c972b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets">
+      <UniqueIdentifier>{26351f77-6d3b-42f5-b463-05c866bcd8e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Field.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Game Engine</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files\Game Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Assets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
