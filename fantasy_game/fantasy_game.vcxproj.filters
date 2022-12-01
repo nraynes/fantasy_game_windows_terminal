@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Game\Assets">
       <UniqueIdentifier>{26351f77-6d3b-42f5-b463-05c866bcd8e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Assets\Super">
+      <UniqueIdentifier>{73f760b4-991c-4dbb-b951-7992387d6ab2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -42,8 +45,31 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Game\Assets</Filter>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

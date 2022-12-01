@@ -1,20 +1,19 @@
-static const int fieldHeight = 29;
-static const int fieldWidth = 110;
-static const char empty = '-';
+#include <string>
+#include <Windows.h>
+#include "Global.h"
 
 struct Coord {
 	int x, y;
+
+	Coord() : x(0), y(0) {}
+	Coord(int i_x, int i_y) : x(i_x), y(i_y) {}
 };
 
 struct Point {
 	char value;
-	Coord location;
 	bool solid;
 
-	Point(int x = 0, int y = 0) : solid(false), value(empty) {
-		location.x = x;
-		location.y = y;
-	}
+	Point(int x = 0, int y = 0) : solid(false), value(empty) {}
 };
 
 struct Field {
@@ -28,5 +27,15 @@ struct Field {
 				matrix[i][j].value = empty;
 			}
 		}
+	}
+
+	void test(std::string message = "None") {
+		for (int i = 0; i < fieldHeight; i++) {
+			for (int j = 0; j < fieldWidth; j++) {
+				matrix[i][j].value = j < message.size() ? message[j] : '0';
+			}
+		}
+		Sleep(500);
+		clear();
 	}
 };

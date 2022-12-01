@@ -1,7 +1,8 @@
-﻿  Source.cpp
+﻿  Game.cpp
+  Source.cpp
   Generating code
-  0 of 1037 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  500 of 1206 functions (41.5%) were compiled, the rest were copied from previous compilation.
+    95 functions were new in current compilation
+    167 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Release\fantasy_game.exe
