@@ -11,6 +11,7 @@ class Screen {
 		std::string output;
 		std::future<void> screenTaskHandle;
 		bool watching;
+		short debugFrame = 0;
 
 	public:
 		Screen() : output(""), FPS(60), watching(false) {
@@ -47,6 +48,12 @@ class Screen {
 			for (short j = 0; j < field.width; j++) {
 				output += "-";
 			}
+			output += std::to_string(debugFrame);
+			if (debugFrame >= 60) {
+				debugFrame = 0;
+			} else {
+				debugFrame++;
+			}
 			// Render stage...
 			clearscreen();
 			std::cout << output;
@@ -56,12 +63,12 @@ class Screen {
 			watching = true;
 			while (watching) {
 				render(field);
-				Sleep(1000 / FPS);
+				std::this_thread::sleep_for(std::chrono::milliseconds(1000 / FPS));
 			}
 		}
 
 		void start(Field& field) {
-			screenTaskHandle = std::async(&Screen::watch, this, std::ref(field));
+			screenTaskHandle = std::async(std::launch::async, &Screen::watch, this, std::ref(field));
 		}
 
 		void stop() {

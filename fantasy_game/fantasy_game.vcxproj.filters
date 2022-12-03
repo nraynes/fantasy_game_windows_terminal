@@ -25,6 +25,24 @@
     <Filter Include="Source Files\Game\Assets\Super">
       <UniqueIdentifier>{73f760b4-991c-4dbb-b951-7992387d6ab2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Assets\Entities">
+      <UniqueIdentifier>{16607461-6b5c-44ae-ab56-3404d8912dae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets\Items">
+      <UniqueIdentifier>{03a57ab5-3cdc-45ea-bc51-9b9aa35b37a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets\Magic">
+      <UniqueIdentifier>{d7a9abeb-1e68-4eb3-8b6e-a0fd63f03a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets\Menu">
+      <UniqueIdentifier>{f2199109-160f-4a4f-8dce-716656adbe84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets\Shops">
+      <UniqueIdentifier>{859d36c8-c218-4c1d-b18f-b48e8670af5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets\Terrains">
+      <UniqueIdentifier>{5b0a083f-e146-48d8-bd95-a7c2ec28d22d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">

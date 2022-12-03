@@ -22,6 +22,7 @@ class Controller {
 		bool lockedInputs[allowableInputs];
 		bool running = false;
 		std::future<void> controllerTaskHandle;
+		std::future<void> delayHandle;
 		bool locked = false;
 		int delayInMs = 0;
 
@@ -74,50 +75,50 @@ class Controller {
 					for (int i = 0; i < allowableInputs; i++) {
 						inputs[i] = false;
 					}
-					Sleep(delayInMs);
+					std::this_thread::sleep_for(std::chrono::milliseconds(delayInMs));
 					delayInMs = 0;
 				}
 			}
 		}
 
 		void delayAnInput(Input& inputType, int& milliseconds) {
-			bool* tempHandle = nullptr;
+			short index = 0;
 			switch (inputType) {
 				case Input::RIGHT:
-					tempHandle = &lockedInputs[0];
+					index = 0;
 					break;
 				case Input::LEFT:
-					tempHandle = &lockedInputs[1];
+					index = 1;
 					break;
 				case Input::UP:
-					tempHandle = &lockedInputs[2];
+					index = 2;
 					break;
 				case Input::DOWN:
-					tempHandle = &lockedInputs[3];
+					index = 3;
 					break;
 				case Input::ACTION:
-					tempHandle = &lockedInputs[4];
+					index = 4;
 					break;
 				case Input::CANCEL:
-					tempHandle = &lockedInputs[5];
+					index = 5;
 					break;
 				case Input::SPECIAL:
-					tempHandle = &lockedInputs[6];
+					index = 6;
 					break;
 				case Input::ESCAPE:
-					tempHandle = &lockedInputs[7];
+					index = 7;
 					break;
 				default:
 					break;
 			}
-			*tempHandle = true;
-			Sleep(milliseconds);
-			*tempHandle = false;
+			lockedInputs[index] = true;
+			std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+			lockedInputs[index] = false;
 		}
 
 	public:
 		void listen() {
-			controllerTaskHandle = std::async(&Controller::ControlEngine, this);
+			controllerTaskHandle = std::async(std::launch::async, &Controller::ControlEngine, this);
 		}
 
 		void stopListening() {
@@ -226,6 +227,6 @@ class Controller {
 		}
 
 		void delaySpecificInput(Input inputType, int milliseconds) {
-			std::future<void> asyncHandle = std::async(&Controller::delayAnInput, this, std::ref(inputType), std::ref(milliseconds));
+			delayHandle = std::async(std::launch::async, &Controller::delayAnInput, this, std::ref(inputType), std::ref(milliseconds));
 		}
 };

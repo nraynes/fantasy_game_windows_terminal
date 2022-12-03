@@ -38,23 +38,27 @@ struct Sprite {
 		sketch(inputStream);
 	}
 
-	bool checkCollision(Field& field, Coord anchor) {
-		for (int i = 0; i < H; i++) { 
+	short checkCollision(Field& field, Coord anchor) {
+		for (int i = 0; i < H; i++) {
 			for (int j = 0; j < W; j++) {
 				int curY = anchor.y + i;
 				int curX = anchor.x + j;
-				if (grid[i][j].value != empty && (
-					curY > field.height - 1
-					|| curY < 0
-					|| curX > field.width - 1
-					|| curX < 0
-					|| (field.matrix[curY][curX].ID != ID && field.matrix[curY][curX].solid)
-					)) {
-					return true;
+				if (grid[i][j].value != empty) {
+					if (
+						curY > field.height - 1
+						|| curY < 0
+						|| curX > field.width - 1
+						|| curX < 0
+						) {
+						return -1;	// -1 means colliding with the border.
+					}
+					if (field.matrix[curY][curX].ID != ID && field.matrix[curY][curX].solid) {
+						return field.matrix[curY][curX].ID;	// Any other number is the ID of the object this sprite is colliding with.
+					}
 				}
 			}
 		}
-		return false;
+		return 0;	// 0 means not colliding.
 	}
 
 	void makeSolid() {

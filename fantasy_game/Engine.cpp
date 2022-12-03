@@ -7,11 +7,11 @@ class GameEngine {
 
 	public:
 		void start(Controller& controller, Screen& screen) {
-			controller.listen();
 			running = true;
 			Field playingField;
 			game.start(playingField, controller, running);
 			screen.start(playingField);
+			controller.listen();
 			while (running) {
 				if (controller.checkInput(Input::ESCAPE)) {
 					running = false;
@@ -20,6 +20,6 @@ class GameEngine {
 			controller.stopListening();
 			screen.stop();
 			game.stop();
-			std::cout << "Game Engine stopped..." << "\n";
+			std::cout << "\nGame Engine stopped...\n";
 		}
 };

@@ -3,7 +3,7 @@
 #include "Sprite.cpp"
 
 template<int H, int W>
-class Object {
+class GameObject {
 	protected:
 		Coord anchor;
 		Field* field;
@@ -13,7 +13,7 @@ class Object {
 		Sprite<H, W> sprite;
 		SpriteList<H, W> spritelist;
 
-		Object(Field& i_field, int x = 0, int y = 0) : ID(0) {
+		GameObject(Field& i_field, int x = 0, int y = 0) : ID(0) {
 			anchor.x = x;
 			anchor.y = y;
 			field = &i_field;
