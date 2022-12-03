@@ -1,4 +1,5 @@
 #include <vector>
+#include <future>
 #include "Sprite.cpp"
 
 template<int H, int W>
@@ -6,7 +7,6 @@ class Entity {
 	private:
 		Coord anchor;
 		Field* field;
-
 
 	public:
 		Sprite<H, W> sprite;

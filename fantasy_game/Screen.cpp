@@ -42,7 +42,10 @@ class Screen {
 				for (short j = 0; j < field.width; j++) {
 					output += field.matrix[i][j].value;
 				}
-				output += "\n";
+				output += "|\n";
+			}
+			for (short j = 0; j < field.width; j++) {
+				output += "-";
 			}
 			// Render stage...
 			clearscreen();

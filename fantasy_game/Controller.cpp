@@ -31,12 +31,12 @@ class Controller {
 			while (running) {
 				if (locked) {
 					input = Input::NOINPUT;
+				} else if (GetKeyState(VK_UP) & 0x8000 && !lockedInputs[2]) {
+					input = Input::UP;
 				} else if (GetKeyState(VK_RIGHT) & 0x8000 && !lockedInputs[0]) {
 					input = Input::RIGHT;
 				} else if (GetKeyState(VK_LEFT) & 0x8000 && !lockedInputs[1]) {
 					input = Input::LEFT;
-				} else if (GetKeyState(VK_UP) & 0x8000 && !lockedInputs[2]) {
-					input = Input::UP;
 				} else if (GetKeyState(VK_DOWN) & 0x8000 && !lockedInputs[3]) {
 					input = Input::DOWN;
 				} else if (GetKeyState('Z') & 0x8000 && !lockedInputs[4]) {
