@@ -12,6 +12,7 @@ struct Coord {
 struct Point {
 	char value;
 	bool solid;
+	short ID;
 
 	Point(int x = 0, int y = 0) : solid(false), value(empty) {}
 };

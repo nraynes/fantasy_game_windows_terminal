@@ -1,73 +1,37 @@
-#include <vector>
-#include <future>
-#include "Sprite.cpp"
+#include "Object.cpp"
 
 template<int H, int W>
-class Entity {
-	private:
-		Coord anchor;
-		Field* field;
-
+class Entity : public Object<H, W> {
 	public:
-		Sprite<H, W> sprite;
-		SpriteList<H, W> spritelist;
+		int health;
 
-		Entity(Field& i_field, int x = 0, int y = 0) {
-			anchor.x = x;
-			anchor.y = y;
-			field = &i_field;
-		}
-
-		void addSprite(std::string name, std::string inputStream = empty) {
-			Sprite<H, W> newSprite = Sprite<H, W>(inputStream);
-			spritelist.add(name, newSprite);
-		}
-
-		void setSprite(std::string name) {
-			sprite = spritelist.select(name);
-		}
-
-		void removeSprite(std::string name) {
-			spritelist.remove(name);
-		}
-
-		void setAnchor(int x, int y) {
-			bool collision = sprite.checkCollision(*field, new Coord(x, y));
-			if (!collision) {
-				anchor.x = x;
-				anchor.y = y;
-			}
-		}
+		Entity(Field& i_field, int x = 0, int y = 0) : Object<H, W>(i_field, x, y), health(100) {}
 
 		void moveRight(int amount = 1) {
-			bool collision = sprite.checkCollision(*field, Coord(anchor.x + amount, anchor.y));
+			bool collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x + amount, this->anchor.y));
 			if (!collision) {
-				anchor.x += amount;
+				this->anchor.x += amount;
 			}
 		}
 
 		void moveLeft(int amount = 1) {
-			bool collision = sprite.checkCollision(*field, Coord(anchor.x - amount, anchor.y));
+			bool collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x - amount, this->anchor.y));
 			if (!collision) {
-				anchor.x -= amount;
+				this->anchor.x -= amount;
 			}
 		}
 
 		void moveUp(int amount = 1) {
-			bool collision = sprite.checkCollision(*field, Coord(anchor.x, anchor.y - amount));
+			bool collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x, this->anchor.y - amount));
 			if (!collision) {
-				anchor.y -= amount;
+				this->anchor.y -= amount;
 			}
 		}
 
 		void moveDown(int amount = 1) {
-			bool collision = sprite.checkCollision(*field, Coord(anchor.x, anchor.y + amount));
+			bool collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x, this->anchor.y + amount));
 			if (!collision) {
-				anchor.y += amount;
+				this->anchor.y += amount;
 			}
-		}
-
-		void render() {
-			 sprite.display(*field, anchor);
 		}
 };

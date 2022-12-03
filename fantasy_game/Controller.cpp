@@ -4,54 +4,76 @@
 #include <Windows.h>
 
 enum class Input {
-	LEFT,
 	RIGHT,
+	LEFT,
 	UP,
 	DOWN,
 	ACTION,
 	CANCEL,
 	SPECIAL,
 	ESCAPE,
-	NOINPUT,
 };
 
 static const short allowableInputs = 8;
 
 class Controller {
 	private:
-		Input input = Input::NOINPUT;
+		bool inputs[allowableInputs];
+		bool lockedInputs[allowableInputs];
 		bool running = false;
 		std::future<void> controllerTaskHandle;
-		bool lockedInputs[allowableInputs]; // 8 is the number of allowable input controls excluding no input. If new inputs are added or some are removed, this number must change to reflect that.
 		bool locked = false;
 		int delayInMs = 0;
 
 		void ControlEngine() {
 			running = true;
 			while (running) {
-				if (locked) {
-					input = Input::NOINPUT;
-				} else if (GetKeyState(VK_UP) & 0x8000 && !lockedInputs[2]) {
-					input = Input::UP;
-				} else if (GetKeyState(VK_RIGHT) & 0x8000 && !lockedInputs[0]) {
-					input = Input::RIGHT;
-				} else if (GetKeyState(VK_LEFT) & 0x8000 && !lockedInputs[1]) {
-					input = Input::LEFT;
-				} else if (GetKeyState(VK_DOWN) & 0x8000 && !lockedInputs[3]) {
-					input = Input::DOWN;
-				} else if (GetKeyState('Z') & 0x8000 && !lockedInputs[4]) {
-					input = Input::ACTION;
-				} else if (GetKeyState('X') & 0x8000 && !lockedInputs[5]) {
-					input = Input::CANCEL;
-				} else if (GetKeyState('C') & 0x8000 && !lockedInputs[6]) {
-					input = Input::SPECIAL;
-				} else if (GetKeyState(VK_ESCAPE) & 0x8000 && !lockedInputs[7]) {
-					input = Input::ESCAPE;
-				} else {
-					input = Input::NOINPUT;
+				if (!locked) {
+					if (GetKeyState(VK_RIGHT) & 0x8000 && !lockedInputs[0]) {
+						inputs[0] = true;
+					} else {
+						inputs[0] = false;
+					}
+					if (GetKeyState(VK_LEFT) & 0x8000 && !lockedInputs[1]) {
+						inputs[1] = true;
+					} else {
+						inputs[1] = false;
+					}
+					if (GetKeyState(VK_UP) & 0x8000 && !lockedInputs[2]) {
+						inputs[2] = true;
+					} else {
+						inputs[2] = false;
+					}
+					if (GetKeyState(VK_DOWN) & 0x8000 && !lockedInputs[3]) {
+						inputs[3] = true;
+					} else {
+						inputs[3] = false;
+					}
+					if (GetKeyState('Z') & 0x8000 && !lockedInputs[4]) {
+						inputs[4] = true;
+					} else {
+						inputs[4] = false;
+					}
+					if (GetKeyState('X') & 0x8000 && !lockedInputs[5]) {
+						inputs[5] = true;
+					} else {
+						inputs[5] = false;
+					}
+					if (GetKeyState('C') & 0x8000 && !lockedInputs[6]) {
+						inputs[6] = true;
+					} else {
+						inputs[6] = false;
+					}
+					if (GetKeyState(VK_ESCAPE) & 0x8000 && !lockedInputs[7]) {
+						inputs[7] = true;
+					} else {
+						inputs[7] = false;
+					}
 				}
 				if (delayInMs > 0) {
-					input = Input::NOINPUT;
+					for (int i = 0; i < allowableInputs; i++) {
+						inputs[i] = false;
+					}
 					Sleep(delayInMs);
 					delayInMs = 0;
 				}
@@ -103,8 +125,27 @@ class Controller {
 			controllerTaskHandle.get();
 		}
 
-		Input getInput() {
-			return input;
+		bool checkInput(Input inputType) {
+			switch (inputType) {
+				case Input::RIGHT:
+					return inputs[0];
+				case Input::LEFT:
+					return inputs[1];
+				case Input::UP:
+					return inputs[2];
+				case Input::DOWN:
+					return inputs[3];
+				case Input::ACTION:
+					return inputs[4];
+				case Input::CANCEL:
+					return inputs[5];
+				case Input::SPECIAL:
+					return inputs[6];
+				case Input::ESCAPE:
+					return inputs[7];
+				default:
+					return false;
+			}
 		}
 
 		void lock() {

@@ -1,8 +1,14 @@
-﻿  Game.cpp
+﻿  Controller.cpp
+  Engine.cpp
+  Entity.cpp
+  Field.cpp
+  Game.cpp
+  Object.cpp
+  Shop.cpp
   Source.cpp
+  Sprite.cpp
   Generating code
-  0 of 1206 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Compiler switch has changed, fall back to full compilation.
+  All 1214 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Release\fantasy_game.exe

@@ -13,8 +13,7 @@ class GameEngine {
 			game.start(playingField, controller, running);
 			screen.start(playingField);
 			while (running) {
-				Input command = controller.getInput();
-				if (command == Input::ESCAPE) {
+				if (controller.checkInput(Input::ESCAPE)) {
 					running = false;
 				}
 			}

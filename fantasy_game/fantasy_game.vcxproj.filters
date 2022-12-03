@@ -66,6 +66,9 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Game\Assets\Super</Filter>
     </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h">
