@@ -11,7 +11,7 @@ class Screen {
 		std::string output;
 		std::future<void> screenTaskHandle;
 		bool watching;
-		short debugFrame = 0;
+		//short debugFrame = 0;
 
 	public:
 		Screen() : output(""), FPS(60), watching(false) {
@@ -48,12 +48,12 @@ class Screen {
 			for (short j = 0; j < field.width; j++) {
 				output += "-";
 			}
-			output += std::to_string(debugFrame);
+			/*output += std::to_string(debugFrame);
 			if (debugFrame >= 60) {
 				debugFrame = 0;
 			} else {
 				debugFrame++;
-			}
+			}*/
 			// Render stage...
 			clearscreen();
 			std::cout << output;
