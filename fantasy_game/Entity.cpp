@@ -9,8 +9,8 @@ class Entity : public GameObject<H, W> {
 		int maxMana;
 
 	public:
-		Entity(Field& i_field, int x = 0, int y = 0) :
-			GameObject<H, W>(i_field, x, y),
+		Entity(Field& i_field, short i_ID, int x = 0, int y = 0) :
+			GameObject<H, W>(i_field, i_ID, x, y),
 			health(100),
 			maxHealth(100),
 			mana(100),
@@ -18,35 +18,23 @@ class Entity : public GameObject<H, W> {
 		{}
 
 		short moveRight(int amount = 1) {
-			short collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x + amount, this->anchor.y));
-			if (!collision) {
-				this->anchor.x += amount;
-			}
-			return collision;
+			Coord thisAnchor = this->getAnchor();
+			return this->setAnchor(thisAnchor.x + amount, thisAnchor.y);;
 		}
 
 		short moveLeft(int amount = 1) {
-			short collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x - amount, this->anchor.y));
-			if (!collision) {
-				this->anchor.x -= amount;
-			}
-			return collision;
+			Coord thisAnchor = this->getAnchor();
+			return this->setAnchor(thisAnchor.x - amount, thisAnchor.y);
 		}
 
 		short moveUp(int amount = 1) {
-			short collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x, this->anchor.y - amount));
-			if (!collision) {
-				this->anchor.y -= amount;
-			}
-			return collision;
+			Coord thisAnchor = this->getAnchor();
+			return this->setAnchor(thisAnchor.x, thisAnchor.y - amount);
 		}
 
 		short moveDown(int amount = 1) {
-			short collision = this->sprite.checkCollision(*this->field, Coord(this->anchor.x, this->anchor.y + amount));
-			if (!collision) {
-				this->anchor.y += amount;
-			}
-			return collision;
+			Coord thisAnchor = this->getAnchor();
+			return this->setAnchor(thisAnchor.x, thisAnchor.y + amount);
 		}
 
 		void takeDamage(int damage) {

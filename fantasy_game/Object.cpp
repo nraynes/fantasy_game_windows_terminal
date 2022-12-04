@@ -4,23 +4,26 @@
 
 template<int H, int W>
 class GameObject {
-	protected:
+	private:
 		Coord anchor;
+
+	protected:
 		Field* field;
 		short ID;
+
+		void updateAnchor() {
+			field->update(ID, anchor);
+		}
 
 	public:
 		Sprite<H, W> sprite;
 		SpriteList<H, W> spritelist;
 
-		GameObject(Field& i_field, int x = 0, int y = 0) : ID(0) {
+		GameObject(Field& i_field, short i_ID, int x = 0, int y = 0) : ID(i_ID) {
 			anchor.x = x;
 			anchor.y = y;
 			field = &i_field;
-		}
-
-		void setID(short& newID) {
-			ID = newID;
+			field->track(ID, anchor);
 		}
 
 		void addSprite(std::string name, std::string inputStream = empty) {
@@ -44,33 +47,25 @@ class GameObject {
 			sprite.makeNotSolid();
 		}
 
-		void setAnchor(int x, int y) {
-			bool collision = sprite.checkCollision(*field, *(new Coord(x, y)));
+		short setAnchor(int x, int y) {
+			short collision = sprite.checkCollision(*field, Coord(x, y));
 			if (!collision) {
 				anchor.x = x;
 				anchor.y = y;
 			}
+			updateAnchor();
+			return collision;
 		}
 
-		void setAnchorRelativeTo(short ID, int x, int y) {
-			Coord relativeAnchor;
-			relativeAnchor.x = 0;
-			relativeAnchor.y = 0;
-			bool breakLoop = false;
-			for(int i = 0; i < field->height; i++) {
-				for (int j = 0; j < field->width; j++) {
-					if (field->matrix[i][j].ID == ID) {
-						relativeAnchor.x = field->matrix[i][j].anchor.x;
-						relativeAnchor.y = field->matrix[i][j].anchor.y;
-						breakLoop = true;
-						break;
-					}
-				}
-				if (breakLoop == true) break;
-			}
-			x += relativeAnchor.x;
-			y += relativeAnchor.y;
-			setAnchor(x, y);
+		Coord getAnchor() {
+			return anchor;
+		}
+
+		short setAnchorRelativeTo(short ID, int x, int y) {
+			ObjectInformation fieldItem = field->getTrackedItem(ID);	
+			x += fieldItem.anchor.x;
+			y += fieldItem.anchor.y;
+			return setAnchor(x, y);
 		}
 
 		void render() {

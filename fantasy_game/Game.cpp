@@ -19,17 +19,13 @@ class Game {
 
 		void play(Field& field, Controller& controller, bool& engineRunning) {
 			// Global game state goes here.
-			Entity<5, 10>* player = new Entity<5, 10>(field, 7, 23);
-			Entity<5, 10>* enemy = new Entity<5, 10>(field, 50, 23);
+			std::unique_ptr<Entity<5, 10>> player(new Entity<5, 10>(field, 1, 7, 23));
+			std::unique_ptr<Entity<5, 10>> enemy(new Entity<5, 10>(field, 2, 50, 23));
 			int refresh = 1000 / g_UPS;
-			short playerID = 1;
-			short enemyID = 2;
 			std::string playerSprite = "   0000   000    000  0    0    000000  00      00";
 			std::string enemySprite = "00      00  00  00      00      00  00  00      00";
-			player->setID(playerID);
 			player->addSprite("default", playerSprite);
 			player->setSprite("default");
-			enemy->setID(enemyID);
 			enemy->addSprite("default", enemySprite);
 			enemy->setSprite("default");
 			enemy->makeSolid();
@@ -85,7 +81,6 @@ class Game {
 							wasHit = true;
 							invincible = true;
 							delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
-							delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
 						}
 					}
 					controller.delaySpecificInput(Input::DOWN, delayVar);
@@ -103,8 +98,6 @@ class Game {
 				player->render();
 				std::this_thread::sleep_for(std::chrono::milliseconds(refresh));
 			}
-			delete player;
-			delete enemy;
 		}
 
 		void start(Field& field, Controller& controller, bool& engineRunning) {
