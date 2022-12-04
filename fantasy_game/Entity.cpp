@@ -50,15 +50,17 @@ class Entity : public GameObject<H, W> {
 		}
 
 		void takeDamage(int damage) {
-			if (health - damage >= 0) {
-				health -= damage;
+			int newHealthVal = health - damage;
+			if (newHealthVal >= 0) {
+				health = newHealthVal;
 			} else {
 				health = 0;
 			}
 		}
 
 		bool isDead() {
-			return health <= 0;
+			bool retVal = health <= 0;
+			return retVal;
 		}
 
 		int getHealth() {

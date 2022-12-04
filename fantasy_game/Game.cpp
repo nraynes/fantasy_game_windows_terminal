@@ -85,12 +85,18 @@ class Game {
 							wasHit = true;
 							invincible = true;
 							delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
+							delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
 						}
 					}
 					controller.delaySpecificInput(Input::DOWN, delayVar);
 				}
+				if (controller.checkInput(Input::ACTION)) {
+					player->setAnchorRelativeTo(2, 20, 0);
+					controller.delaySpecificInput(Input::ACTION, 100);
+				}
 				if (player->isDead()) {
 					engineRunning = false;
+					field.fill(2000, "You are dead!           ");
 				}
 				field.clear();
 				enemy->render();

@@ -45,11 +45,32 @@ class GameObject {
 		}
 
 		void setAnchor(int x, int y) {
-			bool collision = sprite.checkCollision(*field, new Coord(x, y));
+			bool collision = sprite.checkCollision(*field, *(new Coord(x, y)));
 			if (!collision) {
 				anchor.x = x;
 				anchor.y = y;
 			}
+		}
+
+		void setAnchorRelativeTo(short ID, int x, int y) {
+			Coord relativeAnchor;
+			relativeAnchor.x = 0;
+			relativeAnchor.y = 0;
+			bool breakLoop = false;
+			for(int i = 0; i < field->height; i++) {
+				for (int j = 0; j < field->width; j++) {
+					if (field->matrix[i][j].ID == ID) {
+						relativeAnchor.x = field->matrix[i][j].anchor.x;
+						relativeAnchor.y = field->matrix[i][j].anchor.y;
+						breakLoop = true;
+						break;
+					}
+				}
+				if (breakLoop == true) break;
+			}
+			x += relativeAnchor.x;
+			y += relativeAnchor.y;
+			setAnchor(x, y);
 		}
 
 		void render() {

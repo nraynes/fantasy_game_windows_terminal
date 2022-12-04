@@ -6,7 +6,7 @@
 struct Coord {
 	int x, y;
 
-	Coord() : x(0), y(0) {}
+	Coord() : x(-1), y(-1) {}
 	Coord(int i_x, int i_y) : x(i_x), y(i_y) {}
 };
 
@@ -14,6 +14,7 @@ struct Point {
 	char value;
 	bool solid;
 	short ID;
+	Coord anchor;
 
 	Point(int x = 0, int y = 0) : solid(false), value(empty), ID(0) {}
 };

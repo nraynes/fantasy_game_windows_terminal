@@ -11,6 +11,7 @@ struct Sprite {
 	int width = W;
 	Point grid[H][W];
 	short ID;
+	Coord anchor;
 
 	void sketch(std::string& inputStream = "-") {
 		if (inputStream.size() == H * W) {
@@ -81,15 +82,19 @@ struct Sprite {
 		}
 	}
 
-	void display(Field& field, Coord& anchor) {
+	void display(Field& field, Coord& i_anchor) {
+		anchor.x = i_anchor.x;
+		anchor.y = i_anchor.y;
 		for (int i = 0; i < H; i++) {
 			for (int j = 0; j < W; j++) {
-				int curY = anchor.y + i;
-				int curX = anchor.x + j;
+				int curY = i_anchor.y + i;
+				int curX = i_anchor.x + j;
 				if (grid[i][j].value != empty) {
 					field.matrix[curY][curX].value = grid[i][j].value;
 					field.matrix[curY][curX].solid = grid[i][j].solid;
 					field.matrix[curY][curX].ID = grid[i][j].ID;
+					field.matrix[curY][curX].anchor.x = i_anchor.x;
+					field.matrix[curY][curX].anchor.y = i_anchor.y;
 				}
 			}
 		}
