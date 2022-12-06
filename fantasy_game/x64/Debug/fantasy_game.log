@@ -1,6 +1,5 @@
 ﻿  Game.cpp
-  HashTable.cpp
+  Screen.cpp
   Source.cpp
-  Sprite.cpp
   Generating Code...
   fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Debug\fantasy_game.exe

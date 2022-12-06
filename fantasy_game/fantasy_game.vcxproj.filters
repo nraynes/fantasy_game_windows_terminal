@@ -43,6 +43,21 @@
     <Filter Include="Source Files\Game\Assets\Terrains">
       <UniqueIdentifier>{5b0a083f-e146-48d8-bd95-a7c2ec28d22d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game Engine">
+      <UniqueIdentifier>{866a391f-c064-4ad1-8f6d-44efeb16e55f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource">
+      <UniqueIdentifier>{38140a42-d534-4d61-80e4-ac171292abaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{f839f4a5-9cfe-478e-9973-d909004686f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Assets">
+      <UniqueIdentifier>{9eff51ff-78d9-42ce-a480-512384f3b9e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Assets\Super">
+      <UniqueIdentifier>{5fd42d82-6129-4051-ac86-9e3d8199473e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -92,8 +107,38 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Global.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files\Game Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files\Game Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files\Game Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Game Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

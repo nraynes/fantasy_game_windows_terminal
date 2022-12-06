@@ -1,5 +1,7 @@
 #include <iostream>
-#include "Engine.cpp"
+#include "Engine.h"
+#include "Controller.h"
+#include "Screen.h"
 
 int main() {
 	Screen screen;
