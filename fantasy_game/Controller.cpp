@@ -47,7 +47,7 @@ void Controller::ControlEngine() {
 	}
 }
 
-void Controller::delayAnInput(std::atomic<int>& milliseconds, std::atomic<bool>& inputLockRef) {
+void Controller::delayAnInput(std::atomic<int>& milliseconds, bool& inputLockRef) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
 	inputLockRef = false;
 }
@@ -68,7 +68,7 @@ void Controller::stopListening() {
 	controllerTaskHandle.get();
 }
 
-bool Controller::checkInput(Input inputType) {
+bool Controller::checkInput(volatile Input inputType) {
 	switch (inputType) {
 		case Input::RIGHT:
 			return inputs[0];
@@ -106,7 +106,7 @@ void Controller::delayInput(int milliseconds) {
 	delayInMs = milliseconds;
 }
 
-void Controller::lockInput(Input inputType) {
+void Controller::lockInput(volatile Input inputType) {
 	switch (inputType) {
 		case Input::RIGHT:
 			lockedInputs[0] = true;
@@ -137,7 +137,7 @@ void Controller::lockInput(Input inputType) {
 	}
 }
 
-void Controller::unlockInput(Input inputType) {
+void Controller::unlockInput(volatile Input inputType) {
 	switch (inputType) {
 		case Input::RIGHT:
 			lockedInputs[0] = false;
@@ -168,7 +168,7 @@ void Controller::unlockInput(Input inputType) {
 	}
 }
 
-void Controller::delaySpecificInput(Input inputType, std::atomic<int> milliseconds) {
+void Controller::delaySpecificInput(volatile Input inputType, std::atomic<int> milliseconds) {
 	short index = 0;
 	switch (inputType) {
 		case Input::RIGHT:

@@ -8,17 +8,17 @@ const short allowableInputs = 8;
 
 class Controller {
 	private:
-		std::atomic<bool> inputs[allowableInputs];
-		std::atomic<bool> lockedInputs[allowableInputs];
-		std::atomic<bool> running;
+		bool inputs[allowableInputs];
+		bool lockedInputs[allowableInputs];
+		bool running;
 		std::future<void> controllerTaskHandle;
 		std::future<void> delayHandle;
-		std::atomic<bool> locked;
-		std::atomic<int> delayInMs;
+		bool locked;
+		int delayInMs;
 
 		void ControlEngine();
 
-		void delayAnInput(std::atomic<int>& milliseconds, std::atomic<bool>& inputLockRef);
+		void delayAnInput(std::atomic<int>& milliseconds, bool& inputLockRef);
 
 	public:
 		Controller();
@@ -31,7 +31,7 @@ class Controller {
 
 		void stopListening();
 
-		bool checkInput(Input inputType);
+		bool checkInput(volatile Input inputType);
 
 		void lock();
 
@@ -39,9 +39,9 @@ class Controller {
 
 		void delayInput(int milliseconds);
 
-		void lockInput(Input inputType);
+		void lockInput(volatile Input inputType);
 
-		void unlockInput(Input inputType);
+		void unlockInput(volatile Input inputType);
 
-		void delaySpecificInput(Input inputType, std::atomic<int> milliseconds);
+		void delaySpecificInput(volatile Input inputType, std::atomic<int> milliseconds);
 };

@@ -1,5 +1,4 @@
 #pragma once
-#include <atomic>
 #include <string>
 #include "Screen.h"
 #include "Controller.h"
@@ -7,7 +6,7 @@
 
 class GameEngine {
 	private:
-		std::atomic<bool> running;
+		bool running;
 		Game game;
 
 	public:

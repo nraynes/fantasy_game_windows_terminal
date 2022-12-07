@@ -1,7 +1,7 @@
 #include <future>
+#include <mutex>
 #include <Windows.h>
 #include <WinUser.h>
-#include <mutex>
 #include "Field.h"
 #include "HashTable.h"
 
@@ -26,7 +26,6 @@ void Field::debug(std::string message) {
 }
 
 void Field::clear() {
-	std::lock_guard<std::mutex> lock(field_mutex);
 	for (int i = 0; i < fieldHeight; i++) {
 		for (int j = 0; j < fieldWidth; j++) {
 			matrix[i][j].value = empty;
@@ -35,13 +34,11 @@ void Field::clear() {
 }
 
 void Field::fill(int timer, std::string message) {
-	field_mutex.lock();
 	for (int i = 0; i < fieldHeight; i++) {
 		for (int j = 0; j < fieldWidth; j++) {
 			matrix[i][j].value = j < message.size() ? message[j] : '0';
 		}
 	}
-	field_mutex.unlock();
 	std::this_thread::sleep_for(std::chrono::milliseconds(timer));
 	clear();
 }

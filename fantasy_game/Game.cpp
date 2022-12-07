@@ -1,11 +1,10 @@
-#include <atomic>
 #include <Windows.h>
 #include <WinUser.h>
 #include "Game.h"
 
 // Common game functions.
 
-Game::Game() : running(false), g_UPS(60) {}
+Game::Game() : running(false), g_UPS(120) {}
 
 void Game::start(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine) {
 	running = true;

@@ -1,5 +1,4 @@
 #include <vector>
-#include <future>
 #include "Object.h"
 
 template<int H, int W>
@@ -47,8 +46,8 @@ short GameObject<H, W>::setAnchor(int x, int y) {
 	if (!collision) {
 		anchor.x = x;
 		anchor.y = y;
+		updateAnchor();
 	}
-	updateAnchor();
 	return collision;
 }
 

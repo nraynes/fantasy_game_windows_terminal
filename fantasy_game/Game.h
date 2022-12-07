@@ -1,6 +1,5 @@
 #pragma once
 #include <future>
-#include <atomic>
 #include <string>
 #include "Field.h"
 #include "Controller.h"
@@ -9,14 +8,14 @@
 class Game {
 	private:
 		bool running;
-		int g_UPS;	// Global updates per second (Game Loop).
+		const int g_UPS;	// Global updates per second (Game Loop).
 		std::future<void> gameTaskHandle;
 		std::future<void> delayHandle;
 
 	public:
 		Game();
 
-		void delayMortality(std::atomic<bool>& marker);
+		void delayMortality(bool& marker);
 
 		void play(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine);
 

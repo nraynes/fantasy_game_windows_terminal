@@ -6,7 +6,7 @@
 
 #define DEBUG 0
 
-Screen::Screen() : output(""), FPS(120), watching(false), hold(false), debugFrame(0) {
+Screen::Screen() : output(""), watching(false), hold(false), debugFrame(0) {
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
@@ -79,7 +79,6 @@ void Screen::watch(Field& field) {
 		if (!hold) {
 			render(field);
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / FPS));
 	}
 }
 

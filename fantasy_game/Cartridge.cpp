@@ -1,9 +1,8 @@
-#include <atomic>
 #include "Game.h"
 #include "Entity.h"
 #include "Entity.cpp"
 
-void Game::delayMortality(std::atomic<bool>& marker) {
+void Game::delayMortality(bool& marker) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	marker = false;
 }
@@ -25,7 +24,7 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 	int hitTimer = 30;
 	int counter = 0;
 	bool wasHit = false;
-	std::atomic<bool> invincible = false;
+	bool invincible = false;
 	while (running) {
 		// Object and Field updates go here.
 		if (wasHit) {

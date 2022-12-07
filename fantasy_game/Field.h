@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <mutex>
 #include "HashTable.h"
 #include "HashTable.cpp"
 
@@ -39,7 +38,6 @@ class Field {
 		const int height;
 		const int width;
 		Point matrix[fieldHeight][fieldWidth];
-		std::mutex field_mutex;
 
 		Field();
 
