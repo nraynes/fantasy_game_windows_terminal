@@ -2,9 +2,14 @@
 #include "Entity.h"
 #include "Entity.cpp"
 
-void Game::delayMortality(bool& marker) {
+static void delayMortality(bool& marker) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	marker = false;
+}
+
+static void delaySpriteChange(Entity<5, 10>& player) {
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	player.setSprite("default");
 }
 
 void Game::play(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine) {
@@ -13,8 +18,10 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 	std::unique_ptr<Entity<5, 10>> enemy(new Entity<5, 10>(field, 2, 50, 23));
 	int refresh = 1000 / g_UPS;
 	std::string playerSprite = "   0000   000    000  0    0    000000  00      00";
+	std::string playerHitSprite = "  000000  00      000        0 00000000 00      00";
 	std::string enemySprite = "00      00  00  00      00      00  00  00      00";
 	player->addSprite("default", playerSprite);
+	player->addSprite("hit", playerHitSprite);
 	player->setSprite("default");
 	enemy->addSprite("default", enemySprite);
 	enemy->setSprite("default");
@@ -27,18 +34,12 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 	bool invincible = false;
 	while (running) {
 		// Object and Field updates go here.
-		if (wasHit) {
-			player->takeDamage(5);
-			field.fill(hitTimer);
-			wasHit = false;
-		}
 		if (controller.checkInput(Input::LEFT) && !controller.checkInput(Input::RIGHT)) {
 			short collision = player->moveLeft();
 			if (collision == 2) {
 				if (!invincible) {
 					wasHit = true;
 					invincible = true;
-					delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
 				}
 			}
 			controller.delaySpecificInput(Input::LEFT, delayVar);
@@ -49,7 +50,6 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 				if (!invincible) {
 					wasHit = true;
 					invincible = true;
-					delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
 				}
 			}
 			controller.delaySpecificInput(Input::RIGHT, delayVar);
@@ -60,7 +60,6 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 				if (!invincible) {
 					wasHit = true;
 					invincible = true;
-					delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
 				}
 			}
 			controller.delaySpecificInput(Input::DOWN, delayVar);
@@ -71,14 +70,20 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 				if (!invincible) {
 					wasHit = true;
 					invincible = true;
-					delayHandle = std::async(std::launch::async, &Game::delayMortality, this, std::ref(invincible));
 				}
 			}
 			controller.delaySpecificInput(Input::UP, delayVar);
 		}
 		if (player->isDead()) {
+			debug("You are dead!");
 			stopEngine();
-			field.fill(2000, "You are dead!           ");
+		}
+		if (wasHit) {
+			player->takeDamage(5);
+			player->setSprite("hit");
+			handles.push_back(std::async(std::launch::async, delaySpriteChange, std::ref(*player)));
+			handles.push_back(std::async(std::launch::async, delayMortality, std::ref(invincible)));
+			wasHit = false;
 		}
 		screen.pause();
 		field.clear();

@@ -4,7 +4,7 @@
 
 // Common game functions.
 
-Game::Game() : running(false), g_UPS(120) {}
+Game::Game() : running(false), g_UPS(200) {}
 
 void Game::start(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine) {
 	running = true;

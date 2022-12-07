@@ -1,14 +1,4 @@
 ﻿  Cartridge.cpp
-  Controller.cpp
-  Engine.cpp
-  Entity.cpp
-  Field.cpp
-  Game.cpp
-  HashTable.cpp
-  Item.cpp
-  Object.cpp
-  Screen.cpp
   Source.cpp
-  Sprite.cpp
   Generating Code...
   fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Debug\fantasy_game.exe
