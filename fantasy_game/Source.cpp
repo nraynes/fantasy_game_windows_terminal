@@ -8,6 +8,6 @@ int main() {
 	Controller controller;
 	GameEngine engine;
 	screen.hideCursor();
-	engine.start(controller, screen);
+	engine.start(controller,  screen);
 	return 0;
 }

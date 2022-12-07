@@ -1,5 +1,7 @@
 #pragma once
 #include <future>
+#include <atomic>
+#include <string>
 #include "Field.h"
 #include "Controller.h"
 #include "Screen.h"
@@ -14,11 +16,13 @@ class Game {
 	public:
 		Game();
 
-		void delayMortality(bool& marker);
+		void delayMortality(std::atomic<bool>& marker);
 
-		void play(Field& field, Controller& controller, Screen& screen, bool& engineRunning);
+		void play(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine);
 
-		void start(Field& field, Controller& controller, Screen& screen, bool& engineRunning);
+		void debug(std::string message);
+
+		void start(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine);
 
 		void stop();
 };

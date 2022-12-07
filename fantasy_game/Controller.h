@@ -1,25 +1,31 @@
 #pragma once
 #include <future>
+#include <atomic>
+#include <string>
 #include "Input.h"
 
 const short allowableInputs = 8;
 
 class Controller {
 	private:
-		bool inputs[allowableInputs];
-		bool lockedInputs[allowableInputs];
-		bool running;
+		std::atomic<bool> inputs[allowableInputs];
+		std::atomic<bool> lockedInputs[allowableInputs];
+		std::atomic<bool> running;
 		std::future<void> controllerTaskHandle;
 		std::future<void> delayHandle;
-		bool locked = false;
-		int delayInMs;
+		std::atomic<bool> locked;
+		std::atomic<int> delayInMs;
 
 		void ControlEngine();
 
-		void delayAnInput(Input& inputType, int& milliseconds);
+		void delayAnInput(std::atomic<int>& milliseconds, std::atomic<bool>& inputLockRef);
 
 	public:
 		Controller();
+
+		void checkKey(int key, short index);
+
+		void debug(std::string message);
 
 		void listen();
 
@@ -37,5 +43,5 @@ class Controller {
 
 		void unlockInput(Input inputType);
 
-		void delaySpecificInput(Input inputType, int milliseconds);
+		void delaySpecificInput(Input inputType, std::atomic<int> milliseconds);
 };

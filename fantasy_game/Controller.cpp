@@ -1,52 +1,41 @@
 #include <iostream>
 #include <vector>
+#include <atomic>
 #include <Windows.h>
+#include <WinUser.h>
 #include "Controller.h"
+
+void Controller::checkKey(int key, short index) {
+	if (GetKeyState(key) & 0x8000 && !lockedInputs[index]) {
+		inputs[index] = true;
+	} else {
+		inputs[index] = false;
+	}
+}
+
+void Controller::debug(std::string message) {
+	std::wstring stemp = std::wstring(message.begin(), message.end());
+	LPCWSTR sw = stemp.c_str();
+	MessageBox(
+		NULL,
+		sw,
+		(LPCWSTR)L"Controller Debug Message",
+		MB_ICONINFORMATION | MB_OK | MB_DEFBUTTON1
+	);
+}
 
 void Controller::ControlEngine() {
 	running = true;
 	while (running) {
 		if (!locked) {
-			if (GetKeyState(VK_RIGHT) & 0x8000 && !lockedInputs[0]) {
-				inputs[0] = true;
-			} else {
-				inputs[0] = false;
-			}
-			if (GetKeyState(VK_LEFT) & 0x8000 && !lockedInputs[1]) {
-				inputs[1] = true;
-			} else {
-				inputs[1] = false;
-			}
-			if (GetKeyState(VK_UP) & 0x8000 && !lockedInputs[2]) {
-				inputs[2] = true;
-			} else {
-				inputs[2] = false;
-			}
-			if (GetKeyState(VK_DOWN) & 0x8000 && !lockedInputs[3]) {
-				inputs[3] = true;
-			} else {
-				inputs[3] = false;
-			}
-			if (GetKeyState('Z') & 0x8000 && !lockedInputs[4]) {
-				inputs[4] = true;
-			} else {
-				inputs[4] = false;
-			}
-			if (GetKeyState('X') & 0x8000 && !lockedInputs[5]) {
-				inputs[5] = true;
-			} else {
-				inputs[5] = false;
-			}
-			if (GetKeyState('C') & 0x8000 && !lockedInputs[6]) {
-				inputs[6] = true;
-			} else {
-				inputs[6] = false;
-			}
-			if (GetKeyState(VK_ESCAPE) & 0x8000 && !lockedInputs[7]) {
-				inputs[7] = true;
-			} else {
-				inputs[7] = false;
-			}
+			checkKey(VK_RIGHT, 0);
+			checkKey(VK_LEFT, 1);
+			checkKey(VK_UP, 2);
+			checkKey(VK_DOWN, 3);
+			checkKey('Z', 4);
+			checkKey('X', 5);
+			checkKey('C', 6);
+			checkKey(VK_ESCAPE, 7);
 		}
 		if (delayInMs > 0) {
 			for (int i = 0; i < allowableInputs; i++) {
@@ -58,39 +47,9 @@ void Controller::ControlEngine() {
 	}
 }
 
-void Controller::delayAnInput(Input& inputType, int& milliseconds) {
-	short index = 0;
-	switch (inputType) {
-		case Input::RIGHT:
-			index = 0;
-			break;
-		case Input::LEFT:
-			index = 1;
-			break;
-		case Input::UP:
-			index = 2;
-			break;
-		case Input::DOWN:
-			index = 3;
-			break;
-		case Input::ACTION:
-			index = 4;
-			break;
-		case Input::CANCEL:
-			index = 5;
-			break;
-		case Input::SPECIAL:
-			index = 6;
-			break;
-		case Input::ESCAPE:
-			index = 7;
-			break;
-		default:
-			break;
-	}
-	lockedInputs[index] = true;
+void Controller::delayAnInput(std::atomic<int>& milliseconds, std::atomic<bool>& inputLockRef) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
-	lockedInputs[index] = false;
+	inputLockRef = false;
 }
 
 Controller::Controller() : running(false), locked(false), delayInMs(0) {
@@ -209,6 +168,38 @@ void Controller::unlockInput(Input inputType) {
 	}
 }
 
-void Controller::delaySpecificInput(Input inputType, int milliseconds) {
-	delayHandle = std::async(std::launch::async, &Controller::delayAnInput, this, std::ref(inputType), std::ref(milliseconds));
+void Controller::delaySpecificInput(Input inputType, std::atomic<int> milliseconds) {
+	short index = 0;
+	switch (inputType) {
+		case Input::RIGHT:
+			index = 0;
+			break;
+		case Input::LEFT:
+			index = 1;
+			break;
+		case Input::UP:
+			index = 2;
+			break;
+		case Input::DOWN:
+			index = 3;
+			break;
+		case Input::ACTION:
+			index = 4;
+			break;
+		case Input::CANCEL:
+			index = 5;
+			break;
+		case Input::SPECIAL:
+			index = 6;
+			break;
+		case Input::ESCAPE:
+			index = 7;
+			break;
+		default:
+			break;
+	}
+	if (!lockedInputs[index]) {
+		lockedInputs[index] = true;
+		delayHandle = std::async(std::launch::async, &Controller::delayAnInput, this, std::ref(milliseconds), std::ref(lockedInputs[index]));
+	}
 }

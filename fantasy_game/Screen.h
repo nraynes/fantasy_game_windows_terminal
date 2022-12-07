@@ -1,20 +1,25 @@
 #pragma once
 #include <future>
+#include <atomic>
 #include <string>
 #include "Windows.h"
 #include "Field.h"
 
 class Screen {
 	private:
-		int FPS;
+		const int FPS;
 		HANDLE hOut;
 		std::string output;
 		std::future<void> screenTaskHandle;
 		bool watching;
 		bool hold;
+		short debugFrame;
+
 
 	public:
 		Screen();
+
+		void debug(std::string message);
 
 		void hideCursor();
 
