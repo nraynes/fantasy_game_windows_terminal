@@ -5,7 +5,7 @@
 template<int H, int W>
 class Item : public GameObject<H, W> {
 	protected:
-		short itemID; // itemID is used by the game to track items, where as the ID is used by the game engine to track objects and sprites displayed on the field.
+		short itemID;
 
 	public:
 		int value;

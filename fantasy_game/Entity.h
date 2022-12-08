@@ -5,7 +5,7 @@
 
 template<int H, int W>
 class Entity : public GameObject<H, W> {
-	private:
+	protected:
 		int health;
 		int maxHealth;
 		int mana;

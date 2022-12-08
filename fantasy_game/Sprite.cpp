@@ -72,7 +72,7 @@ template<int H, int W>
 void Sprite<H, W>::makeNotSolid() {
 	for (int i = 0; i < H; i++) {
 		for (int j = 0; j < W; j++) {
-			if (grid[i][j].value != empty) {
+			if (grid[i][j].solid) {
 				grid[i][j].solid = false;
 			}
 		}

@@ -165,6 +165,7 @@
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Magic.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Sprite.h" />

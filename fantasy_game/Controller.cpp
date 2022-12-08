@@ -1,9 +1,13 @@
 #include <iostream>
+#include <bitset>
+#include <mutex>
 #include <vector>
 #include <atomic>
 #include <Windows.h>
 #include <WinUser.h>
 #include "Controller.h"
+
+static std::mutex lockedInputs_mutex;
 
 void Controller::checkKey(int key, short index) {
 	if (GetKeyState(key) & 0x8000 && !lockedInputs[index]) {
@@ -47,8 +51,9 @@ void Controller::ControlEngine() {
 	}
 }
 
-void Controller::delayAnInput(std::atomic<int>& milliseconds, bool& inputLockRef) {
+void Controller::delayAnInput(std::atomic<int>& milliseconds, std::bitset<allowableInputs>::reference inputLockRef) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+	std::lock_guard<std::mutex> lock(lockedInputs_mutex);
 	inputLockRef = false;
 }
 
@@ -169,7 +174,7 @@ void Controller::unlockInput(volatile Input inputType) {
 }
 
 void Controller::delaySpecificInput(volatile Input inputType, std::atomic<int> milliseconds) {
-	short index = 0;
+	int index = 0;
 	switch (inputType) {
 		case Input::RIGHT:
 			index = 0;
@@ -200,6 +205,6 @@ void Controller::delaySpecificInput(volatile Input inputType, std::atomic<int> m
 	}
 	if (!lockedInputs[index]) {
 		lockedInputs[index] = true;
-		delayHandle = std::async(std::launch::async, &Controller::delayAnInput, this, std::ref(milliseconds), std::ref(lockedInputs[index]));
+		delayHandle = std::async(std::launch::async, &Controller::delayAnInput, this, std::ref(milliseconds), lockedInputs[index]);
 	}
 }

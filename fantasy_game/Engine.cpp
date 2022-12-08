@@ -25,7 +25,11 @@ void GameEngine::start(Controller& controller, Screen& screen) {
 	controller.listen();
 	while (running) {
 		if (controller.checkInput(Input::ESCAPE)) {
-			running = false;
+			if (game.isPaused()) {
+				game.unpause();
+			} else {
+				game.pause();
+			}
 		}
 	}
 	controller.stopListening();

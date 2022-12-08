@@ -1,5 +1,6 @@
 #pragma once
 #include <future>
+#include <bitset>
 #include <atomic>
 #include <string>
 #include "Input.h"
@@ -8,8 +9,8 @@ const short allowableInputs = 8;
 
 class Controller {
 	private:
-		bool inputs[allowableInputs];
-		bool lockedInputs[allowableInputs];
+		std::bitset<allowableInputs> inputs;
+		std::bitset<allowableInputs> lockedInputs;
 		bool running;
 		std::future<void> controllerTaskHandle;
 		std::future<void> delayHandle;
@@ -18,7 +19,7 @@ class Controller {
 
 		void ControlEngine();
 
-		void delayAnInput(std::atomic<int>& milliseconds, bool& inputLockRef);
+		void delayAnInput(std::atomic<int>& milliseconds, std::bitset<allowableInputs>::reference inputLockRef);
 
 	public:
 		Controller();
