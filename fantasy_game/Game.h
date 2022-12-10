@@ -7,6 +7,8 @@
 #include "Controller.h"
 #include "Screen.h"
 
+class GameEngine;
+
 class Game {
 	private:
 		bool running;
@@ -20,11 +22,11 @@ class Game {
 	public:
 		Game();
 
-		void play(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine);
+		void play(Field& field, Controller& controller, Screen& screen, GameEngine* engine);
 
 		void debug(std::string message);
 
-		void start(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine);
+		void start(Field& field, Controller& controller, Screen& screen, GameEngine* engine);
 
 		void pause();
 

@@ -1,8 +1,9 @@
 #include "Game.h"
 #include "Entity.h"
 #include "Entity.cpp"
+#include "Engine.h"
 
-void Game::play(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine) {
+void Game::play(Field& field, Controller& controller, Screen& screen, GameEngine* engine) {
 	// Global game state goes here.
 	std::unique_ptr<Entity<5, 10>> player(new Entity<5, 10>(field, 1, 7, 23));
 	std::unique_ptr<Entity<5, 10>> enemy(new Entity<5, 10>(field, 2, 50, 23));
@@ -71,7 +72,7 @@ void Game::play(Field& field, Controller& controller, Screen& screen, std::funct
 		}
 		if (player->isDead()) {
 			debug("You are dead!");
-			stopEngine();
+			engine->stop();
 		}
 		if (wasHit) {
 			player->takeDamage(5);

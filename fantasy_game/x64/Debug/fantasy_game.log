@@ -1,6 +1,4 @@
-﻿  Cartridge.cpp
-  Engine.cpp
-  Game.cpp
-  Source.cpp
+﻿  Game.cpp
+  Map.cpp
   Generating Code...
   fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Debug\fantasy_game.exe

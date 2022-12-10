@@ -7,9 +7,9 @@
 
 Game::Game() : running(false), paused(false), gameSpeed(200) {}
 
-void Game::start(Field& field, Controller& controller, Screen& screen, std::function<void()> stopEngine) {
+void Game::start(Field& field, Controller& controller, Screen& screen, GameEngine* engine) {
 	running = true;
-	gameTaskHandle = std::async(std::launch::async, &Game::play, this, std::ref(field), std::ref(controller), std::ref(screen), stopEngine);
+	gameTaskHandle = std::async(std::launch::async, &Game::play, this, std::ref(field), std::ref(controller), std::ref(screen), engine);
 }
 
 void Game::pause() {

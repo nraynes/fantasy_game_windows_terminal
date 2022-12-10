@@ -58,6 +58,9 @@
     <Filter Include="Header Files\Game\Assets\Super">
       <UniqueIdentifier>{5fd42d82-6129-4051-ac86-9e3d8199473e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Assets\Maps">
+      <UniqueIdentifier>{dfec1305-57d3-4e31-8606-323159af30e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -108,6 +111,9 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Game Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\Game\Assets\Super</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -144,6 +150,18 @@
       <Filter>Header Files\Game Engine</Filter>
     </ClInclude>
     <ClInclude Include="Magic.h">
+      <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
     </ClInclude>
   </ItemGroup>

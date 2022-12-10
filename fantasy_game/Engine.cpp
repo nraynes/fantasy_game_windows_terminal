@@ -20,7 +20,7 @@ void GameEngine::debug(std::string message) {
 void GameEngine::start(Controller& controller, Screen& screen) {
 	running = true;
 	std::unique_ptr<Field> playingField(new Field);
-	game.start(*playingField, controller, screen, std::bind(&GameEngine::stop, this));
+	game.start(*playingField, controller, screen, this);
 	screen.start(*playingField); // This will allow the screen to run parallel to the game loop. Use screen.pause or screen.resume to control screen updates.
 	controller.listen();
 	while (running) {

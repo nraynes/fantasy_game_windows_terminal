@@ -147,6 +147,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -166,9 +167,13 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Magic.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="Shop.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Terrain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
