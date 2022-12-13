@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Game\Assets\Maps">
       <UniqueIdentifier>{dfec1305-57d3-4e31-8606-323159af30e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Assets\Maps">
+      <UniqueIdentifier>{200a9dbc-0c4f-4ae4-8d2a-a1b4269bbc62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Assets\Objects">
+      <UniqueIdentifier>{da429a57-f926-4d0d-a772-858b004de539}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -112,7 +118,10 @@
       <Filter>Source Files\Game Engine</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Source Files\Game\Assets\Super</Filter>
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Home.cpp">
+      <Filter>Source Files\Game\Assets\Maps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,14 +164,17 @@
     <ClInclude Include="Terrain.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files\Game\Assets\Super</Filter>
-    </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
     </ClInclude>
     <ClInclude Include="Shop.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Home.h">
+      <Filter>Header Files\Game\Assets\Maps</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

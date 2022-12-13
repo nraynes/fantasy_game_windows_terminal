@@ -6,6 +6,7 @@
 #include "Field.h"
 #include "Controller.h"
 #include "Screen.h"
+#include "Map.h"
 
 class GameEngine;
 
@@ -16,6 +17,7 @@ class Game {
 		std::future<void> gameTaskHandle;
 		std::vector<std::future<void>> handles;
 		std::atomic<bool> paused;
+		Map* map;
 
 		void m_delay(std::function<void()> callback, std::atomic<volatile int>& milliseconds);
 

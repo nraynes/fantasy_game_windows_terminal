@@ -1,48 +1,41 @@
 #include <vector>
+#include <memory>
 #include "Object.h"
 
-template<int H, int W>
-void GameObject<H, W>::updateAnchor() {
+void GameObject::updateAnchor() {
 	field->update(ID, anchor);
 }
 
-template<int H, int W>
-GameObject<H, W>::GameObject(Field& i_field, short i_ID, int x, int y) : ID(i_ID) {
+GameObject::GameObject(Field& i_field, short i_ID, int x, int y) : ID(i_ID), sprite(nullptr) {
 	anchor.x = x;
 	anchor.y = y;
 	field = &i_field;
 	field->track(ID, anchor);
 }
 
-template<int H, int W>
-void GameObject<H, W>::addSprite(std::string name, std::string inputStream) {
-	Sprite<H, W> newSprite = Sprite<H, W>(inputStream, ID);
+void GameObject::addSprite(int H, int W, std::string name, std::string inputStream) {
+	Sprite* newSprite = new Sprite(H, W, inputStream, ID);
 	spritelist.add(name, newSprite);
 }
 
-template<int H, int W>
-void GameObject<H, W>::setSprite(std::string name) {
+void GameObject::setSprite(std::string name) {
 	sprite = spritelist.select(name);
 }
 
-template<int H, int W>
-void GameObject<H, W>::removeSprite(std::string name) {
+void GameObject::removeSprite(std::string name) {
 	spritelist.remove(name);
 }
 
-template<int H, int W>
-void GameObject<H, W>::makeSolid() {
-	sprite.makeSolid();
+void GameObject::makeSolid() {
+	sprite->makeSolid();
 }
 
-template<int H, int W>
-void GameObject<H, W>::makeNotSolid() {
-	sprite.makeNotSolid();
+void GameObject::makeNotSolid() {
+	sprite->makeNotSolid();
 }
 
-template<int H, int W>
-short GameObject<H, W>::setAnchor(int x, int y) {
-	short collision = sprite.checkCollision(*field, Coord(x, y));
+short GameObject::setAnchor(int x, int y) {
+	short collision = sprite->checkCollision(*field, Coord(x, y));
 	if (!collision) {
 		anchor.x = x;
 		anchor.y = y;
@@ -51,20 +44,17 @@ short GameObject<H, W>::setAnchor(int x, int y) {
 	return collision;
 }
 
-template<int H, int W>
-Coord GameObject<H, W>::getAnchor() {
+Coord GameObject::getAnchor() {
 	return anchor;
 }
 
-template<int H, int W>
-short GameObject<H, W>::setAnchorRelativeTo(short ID, int x, int y) {
+short GameObject::setAnchorRelativeTo(short ID, int x, int y) {
 	ObjectInformation fieldItem = field->getTrackedItem(ID);	
 	x += fieldItem.anchor.x;
 	y += fieldItem.anchor.y;
 	return setAnchor(x, y);
 }
 
-template<int H, int W>
-void GameObject<H, W>::render() {
-	sprite.display(*field, anchor);
+void GameObject::render() {
+	sprite->display(*field, anchor);
 }

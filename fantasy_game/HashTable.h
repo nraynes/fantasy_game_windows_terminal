@@ -12,6 +12,7 @@ template<class T, int tableSize = 10>
 class HashTable {
 	private:
 		std::vector<Unit<T>> table[tableSize];
+		int m_size;
 
 		int hash(std::string& name);
 
@@ -27,4 +28,6 @@ class HashTable {
 		void change(std::string& name, T& newItem);
 
 		void remove(std::string& name);
+
+		int size();
 };

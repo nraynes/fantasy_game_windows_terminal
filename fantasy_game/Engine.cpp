@@ -30,6 +30,7 @@ void GameEngine::start(Controller& controller, Screen& screen) {
 			} else {
 				game.pause();
 			}
+			controller.delaySpecificInput(Input::ESCAPE, 500);
 		}
 	}
 	controller.stopListening();

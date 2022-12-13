@@ -1,10 +1,8 @@
 #pragma once
 #include "Field.h"
 #include "Object.h"
-#include "Object.cpp"
 
-template<int H, int W>
-class Entity : public GameObject<H, W> {
+class Entity : public GameObject {
 	protected:
 		int health;
 		int maxHealth;

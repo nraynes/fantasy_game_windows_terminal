@@ -3,8 +3,7 @@
 #include "Field.h"
 #include "Object.h"
 
-template<int H, int W>
-class Magic : public GameObject<H, W> {
+class Magic : public GameObject {
 	protected:
 		short spellID;
 		std::string type;

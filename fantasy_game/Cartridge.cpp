@@ -1,27 +1,23 @@
 #include "Game.h"
 #include "Entity.h"
-#include "Entity.cpp"
 #include "Engine.h"
+#include "Home.h"
 
 void Game::play(Field& field, Controller& controller, Screen& screen, GameEngine* engine) {
 	// Global game state goes here.
-	std::unique_ptr<Entity<5, 10>> player(new Entity<5, 10>(field, 1, 7, 23));
-	std::unique_ptr<Entity<5, 10>> enemy(new Entity<5, 10>(field, 2, 50, 23));
-	std::unique_ptr<Entity<5, 10>> enemyTwo(new Entity<5, 10>(field, 3, 20, 5));
+	std::unique_ptr<Entity> player(new Entity(field, 1, 7, 23));
 	int refresh = 1000 / gameSpeed;
 	std::string playerSprite = "   0000   000    000  0    0    000000  00      00";
 	std::string playerHitSprite = "  000000  00      000        0 00000000 00      00";
-	std::string enemySprite = "00      00  00  00      00      00  00  00      00";
-	player->addSprite("default", playerSprite);
-	player->addSprite("hit", playerHitSprite);
+	player->addSprite(5, 10, "default", playerSprite);
+	player->addSprite(5, 10, "hit", playerHitSprite);
 	player->setSprite("default");
-	enemy->addSprite("default", enemySprite);
-	enemy->setSprite("default");
-	enemyTwo->addSprite("default", enemySprite);
-	enemyTwo->setSprite("default");
-	enemy->makeSolid();
-	enemyTwo->makeSolid();
 	player->makeSolid();
+
+	Home* home = new Home(field);
+
+	map = home;
+
 	int delayVar = 30;
 	int hitTimer = 30;
 	int counter = 0;
@@ -83,8 +79,7 @@ void Game::play(Field& field, Controller& controller, Screen& screen, GameEngine
 		}
 		screen.pause();
 		field.clear();
-		enemy->render();
-		enemyTwo->render();
+		map->render();
 		player->render();
 		screen.resume();
 		std::this_thread::sleep_for(std::chrono::milliseconds(refresh));

@@ -3,40 +3,45 @@
 #include <string>
 #include <vector>
 #include "Sprite.h"
+#include "Field.h"
 
-template<int H, int W>
-void Sprite<H, W>::sketch(std::string& inputStream) {
-	if (inputStream.size() == H * W) {
+void Sprite::sketch(const std::string& inputStream) {
+	int fullSize = height * width;
+	if (inputStream.size() == fullSize) {
 		int x = 0, y = 0;
 		for (int i = 0; i < inputStream.size(); i++) {
 			grid[y][x].value = inputStream[i];
 			grid[y][x].ID = ID;
 			x++;
-			if (x >= W) {
+			if (x >= width) {
 				x = 0;
 				y++;
 			}
 		}
-	};
+	}
 }
 
-template<int H, int W>
-void Sprite<H, W>::setID(short& newID) {
+void Sprite::setID(short& newID) {
 	ID = newID;
 }
 
-template<int H, int W>
-Sprite<H, W>::Sprite(std::string inputStream, short newID) : height(H), width(W) {
+Sprite::Sprite(const int& H, const int& W, std::string inputStream, short newID) : height(H), width(W) {
+	/*Point* sub = new Point[W];
+	grid = (Point**)calloc(H, sizeof(*sub));*/
+
+	grid = new Point*[H];
+	for (int i = 0; i < H; i++) {
+		grid[i] = new Point[W];
+	}
 	if (newID != 0) {
 		setID(newID);
 	}
 	sketch(inputStream);
 }
 
-template<int H, int W>
-short Sprite<H, W>::checkCollision(Field& field, Coord anchor) {
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < W; j++) {
+short Sprite::checkCollision(Field& field, Coord anchor) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			int curY = anchor.y + i;
 			int curX = anchor.x + j;
 			if (grid[i][j].value != empty) {
@@ -57,10 +62,9 @@ short Sprite<H, W>::checkCollision(Field& field, Coord anchor) {
 	return 0;	// 0 means not colliding.
 }
 
-template<int H, int W>
-void Sprite<H, W>::makeSolid() {
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < W; j++) {
+void Sprite::makeSolid() {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			if (grid[i][j].value != empty) {
 				grid[i][j].solid = true;
 			}
@@ -68,10 +72,9 @@ void Sprite<H, W>::makeSolid() {
 	}
 }
 
-template<int H, int W>
-void Sprite<H, W>::makeNotSolid() {
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < W; j++) {
+void Sprite::makeNotSolid() {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			if (grid[i][j].solid) {
 				grid[i][j].solid = false;
 			}
@@ -79,12 +82,11 @@ void Sprite<H, W>::makeNotSolid() {
 	}
 }
 
-template<int H, int W>
-void Sprite<H, W>::display(Field& field, Coord& i_anchor) {
+void Sprite::display(Field& field, Coord& i_anchor) {
 	anchor.x = i_anchor.x;
 	anchor.y = i_anchor.y;
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < W; j++) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			int curY = i_anchor.y + i;
 			int curX = i_anchor.x + j;
 			if (grid[i][j].value != empty) {

@@ -1,9 +1,7 @@
 #pragma once
-#include "Field.h"
 #include "Object.h"
 
-template<int H, int W>
-class Item : public GameObject<H, W> {
+class Item : public GameObject {
 	protected:
 		short itemID;
 

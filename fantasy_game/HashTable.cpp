@@ -38,6 +38,7 @@ void HashTable<T, tableSize>::add(std::string& name, T& item) {
 	int index = hash(name);
 	if (!searchBucket(name, index)) {
 		table[index].push_back(unit);
+		m_size++;
 	}
 }
 
@@ -67,6 +68,13 @@ void HashTable<T, tableSize>::remove(std::string& name) {
 	for (int i = 0; i < table[index].size(); i++) {
 		if (table[index][i].name == name) {
 			table[index].erase(table[index].begin() + i);
+			m_size--;
+			return;
 		}
 	}
+}
+
+template<class T, int tableSize>
+int HashTable<T, tableSize>::size() {
+	return m_size;
 }

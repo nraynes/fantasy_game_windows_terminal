@@ -1,10 +1,9 @@
 #pragma once
+#include <string>
 #include "Sprite.h"
-#include "Sprite.cpp"
 #include "Field.h"
 #include "HashTable.h"
 
-template<int H, int W>
 class GameObject {
 	private:
 		Coord anchor;
@@ -13,29 +12,29 @@ class GameObject {
 		Field* field;
 		short ID;
 
-		void updateAnchor();
+		virtual void updateAnchor();
 
 	public:
-		Sprite<H, W> sprite;
-		HashTable<Sprite<H, W>> spritelist;
+		Sprite* sprite;
+		HashTable<Sprite*> spritelist;
 
 		GameObject(Field& i_field, short i_ID, int x = 0, int y = 0);
 
-		void addSprite(std::string name, std::string inputStream = empty);
+		virtual void addSprite(int H, int W, std::string name, std::string inputStream = std::to_string(empty));
 
-		void setSprite(std::string name);
+		virtual void setSprite(std::string name);
 
-		void removeSprite(std::string name);
+		virtual void removeSprite(std::string name);
 
-		void makeSolid();
+		virtual void makeSolid();
 
-		void makeNotSolid();
+		virtual void makeNotSolid();
 
-		short setAnchor(int x, int y);
+		virtual short setAnchor(int x, int y);
 
-		Coord getAnchor();
+		virtual Coord getAnchor();
 
-		short setAnchorRelativeTo(short ID, int x, int y);
+		virtual short setAnchorRelativeTo(short ID, int x, int y);
 
-		void render();
+		virtual void render();
 };
