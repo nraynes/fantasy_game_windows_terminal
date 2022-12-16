@@ -1,7 +1,4 @@
-﻿  Entity.cpp
-  HashTable.cpp
-  Item.cpp
-  Object.cpp
-  Source.cpp
+﻿  Source.cpp
+  Terrain.cpp
   Generating Code...
   fantasy_game.vcxproj -> C:\Users\nicho\source\repos\fantasy_game\x64\Debug\fantasy_game.exe

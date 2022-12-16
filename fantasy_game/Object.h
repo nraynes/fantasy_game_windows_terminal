@@ -11,6 +11,7 @@ class GameObject {
 	protected:
 		Field* field;
 		short ID;
+		bool solid;
 
 		virtual void updateAnchor();
 

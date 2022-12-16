@@ -6,6 +6,7 @@ class Sprite {
 	public:
 		int height;
 		int width;
+		bool solid;
 		Point **grid;
 		short ID;
 		Coord anchor;

@@ -46,9 +46,6 @@
     <Filter Include="Header Files\Game Engine">
       <UniqueIdentifier>{866a391f-c064-4ad1-8f6d-44efeb16e55f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Resource">
-      <UniqueIdentifier>{38140a42-d534-4d61-80e4-ac171292abaf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{f839f4a5-9cfe-478e-9973-d909004686f0}</UniqueIdentifier>
     </Filter>
@@ -67,6 +64,33 @@
     <Filter Include="Source Files\Game\Assets\Objects">
       <UniqueIdentifier>{da429a57-f926-4d0d-a772-858b004de539}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Resource">
+      <UniqueIdentifier>{38140a42-d534-4d61-80e4-ac171292abaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Assets\Entities">
+      <UniqueIdentifier>{15a6555e-6d8f-498e-8615-602ea15ca64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Data Structures">
+      <UniqueIdentifier>{43753b81-216a-4b9b-8e01-bdb1dd26eea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource\Data Structures">
+      <UniqueIdentifier>{b458a58e-d4d1-4f2c-a4d4-8318c8611da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource\Enums">
+      <UniqueIdentifier>{9cae3479-09e2-4568-b2fd-b639afb22828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource\Core">
+      <UniqueIdentifier>{d3b38dae-d870-4952-8588-192112f50a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Core">
+      <UniqueIdentifier>{e697e93f-ea8c-4050-bc69-cc3c4bebd735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Game Resources">
+      <UniqueIdentifier>{748dceaa-77fd-420b-bfc3-e43efde6c753}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource\Game Resources">
+      <UniqueIdentifier>{4fb368f3-927c-4d10-9695-d04605cb3e3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -77,9 +101,6 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files\Game Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Field.cpp">
-      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Game\Assets\Super</Filter>
@@ -93,20 +114,11 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Source Files\Game\Assets\Super</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Game\Assets\Super</Filter>
     </ClCompile>
     <ClCompile Include="Shop.cpp">
       <Filter>Source Files\Game\Assets\Super</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HashTable.cpp">
-      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Cartridge.cpp">
       <Filter>Source Files\Game</Filter>
@@ -117,11 +129,29 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Game Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Home.cpp">
       <Filter>Source Files\Game\Assets\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Game\Assets\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="HashTable.cpp">
+      <Filter>Resource Files\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>Resource Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Resource Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Resource Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Resource Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareGrid.cpp">
+      <Filter>Resource Files\Data Structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,26 +164,11 @@
     <ClInclude Include="Controller.h">
       <Filter>Header Files\Game Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Field.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="HashTable.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\Game Engine</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\Game Engine</Filter>
@@ -170,11 +185,35 @@
     <ClInclude Include="Shop.h">
       <Filter>Header Files\Game\Assets\Super</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="Home.h">
       <Filter>Header Files\Game\Assets\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Game\Assets\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Header Files\Resource\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Resource\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Border.h">
+      <Filter>Header Files\Resource\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>Header Files\Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareGrid.h">
+      <Filter>Header Files\Resource\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -63,6 +63,7 @@ short Sprite::checkCollision(Field& field, Coord anchor) {
 }
 
 void Sprite::makeSolid() {
+	solid = true;
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			if (grid[i][j].value != empty) {
@@ -73,6 +74,7 @@ void Sprite::makeSolid() {
 }
 
 void Sprite::makeNotSolid() {
+	solid = false;
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			if (grid[i][j].solid) {
